@@ -6,10 +6,10 @@ import { Admin } from "./pages/Admin";
 import { HodLogin } from "./pages/HodLogin";
 import { Booked } from "./components/Booked";
 import { SubmitForm } from "./components/SubmitForm";
-import { AdminPanel } from "./components/adminPanel";
+import { AdminPanel } from "./components/AdminPanel";
 import { LandingPage } from "./components/LandingPage";
-import { HodUpdates } from "./components/hodUpdates";
-import { HodHome } from "./components/hodHome";
+import { HodUpdates } from "./components/HodUpdates";
+import { HodHome } from "./components/HodHome";
 import { AcceptedList } from "./components/AcceptedList";
 import { RejectedList } from "./components/RejectedList";
 
