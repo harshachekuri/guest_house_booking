@@ -1,5 +1,6 @@
 import express from "express";
 import { formModel } from "../models/submitForm.js";
+import { rdModel } from "../models/rdModel.js";
 const router = express.Router();
 
 router.post("/", async (req, res) => {
@@ -19,16 +20,20 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.put("/accepted/:id", async (req, res) => {
+router.post("/accepted/:id", async (req, res) => {
   try {
     const id = req.params.id;
-    const { status } = req.body;
-    const result = await formModel.findByIdAndUpdate(
+    const { status, dates, room } = req.body;
+    const updatedStatus = await formModel.findByIdAndUpdate(
       { _id: req.params.id },
       { status },
       { new: true }
     );
-    res.json(result);
+    const updatedRoom = await rdModel.updateOne(
+      { room: room },
+      { $pull: { dates: { $in: dates } } }
+    );
+    res.json(updatedStatus);
   } catch (err) {
     console.log(err.message);
   }

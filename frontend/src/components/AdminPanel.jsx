@@ -17,13 +17,15 @@ export const AdminPanel = () => {
     };
     fetchRequests();
   }, []);
-  const handleAccept = async (id) => {
+  const handleAccept = async (id, dates, room) => {
     try {
-      const result = await axios.put(`${URL}/form/accepted/${id}`, {
+      const result = await axios.post(`${URL}/form/accepted/${id}`, {
         status: 1,
+        dates,
+        room,
       });
+      console.log(result.data);
       alert("Added to Accepted List");
-      const response = await axios.post(`${URL}/for`);
     } catch (err) {
       console.log(err.message);
     }
@@ -49,35 +51,46 @@ export const AdminPanel = () => {
     <div className="twoLists">
       <div className="adminPanel">
         <h2>Admin Panel</h2>
-        {hodRequest.map((item, index) => {
-          return (
-            <div className="request">
-              <h3>Request {index + 1}</h3>
-              <p key={hodRequest._id}>Hod Name: {item.hodName}</p>
-              <p key={hodRequest._id}>Department: {item.department}</p>
-              <p key={hodRequest._id}>Room No: {item.room}</p>
-              <p key={hodRequest._id}>Booking For: {item.bookingFor}</p>
-              <p key={hodRequest._id}>Guest Contact: {item.guestPhoneNo}</p>
-              <p key={hodRequest._id}>Purpose: {item.purpose}</p>
-              <p>
-                <u>Dates:</u>
-              </p>
-              {item.dates.map((another) => (
-                <p>Dec {another}</p>
-              ))}
-              <p key={hodRequest._id}>Status: {item.status}</p>
+        {hodRequest
+          .slice()
+          .reverse()
+          .map((item) => {
+            return (
+              <div className="request">
+                <h3>Request</h3>
+                <p key={hodRequest._id}>Hod Name: {item.hodName}</p>
+                <p key={hodRequest._id}>Department: {item.department}</p>
+                <p key={hodRequest._id}>Room No: {item.room}</p>
+                <p key={hodRequest._id}>Booking For: {item.bookingFor}</p>
+                <p key={hodRequest._id}>Guest Contact: {item.guestPhoneNo}</p>
+                <p key={hodRequest._id}>Purpose: {item.purpose}</p>
+                <p>
+                  <u>Dates:</u>
+                </p>
+                {item.dates.map((another) => (
+                  <p>Dec {another}</p>
+                ))}
+                <p key={hodRequest._id}>Status: {item.status}</p>
 
-              {item.status == 0 ? (
-                <div className="buttons">
-                  <button onClick={() => handleAccept(item._id)}>Accept</button>
-                  <button onClick={() => handleReject(item._id)}>Reject</button>
-                </div>
-              ) : (
-                <></>
-              )}
-            </div>
-          );
-        })}
+                {item.status == 0 ? (
+                  <div className="buttons">
+                    <button
+                      onClick={() =>
+                        handleAccept(item._id, item.dates, item.room)
+                      }
+                    >
+                      Accept
+                    </button>
+                    <button onClick={() => handleReject(item._id)}>
+                      Reject
+                    </button>
+                  </div>
+                ) : (
+                  <></>
+                )}
+              </div>
+            );
+          })}
       </div>
       <div className="acceptedRejected">
         <button onClick={handleAcceptBtn}>Accepted List</button>

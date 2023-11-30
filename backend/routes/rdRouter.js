@@ -33,7 +33,6 @@ router.post("/availableRooms", async (req, res) => {
 router.post("/updatedRoom", async (req, res) => {
   try {
     const { room, dates } = req.body;
-    a;
   } catch (err) {
     console.log(er.message);
   }

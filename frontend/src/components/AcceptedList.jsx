@@ -22,15 +22,19 @@ export const AcceptedList = () => {
       {acceptedList.map((item, index) => {
         return (
           <div className="request">
-            <h3>Accepted Request {index + 1}</h3>
+            <h3>Accepted Request</h3>
             <p key={item._id}>Hod Name: {item.hodName}</p>
             <p key={item._id}>Department: {item.department}</p>
             <p key={item._id}>Room No: {item.room}</p>
             <p key={item._id}>Booking For: {item.bookingFor}</p>
             <p key={item._id}>Guest Contact: {item.guestPhoneNo}</p>
-            <p key={item._id}>From Date: {item.fromDate}</p>
-            <p key={item._id}>To Date: {item.toDate}</p>
             <p key={item._id}>Purpose: {item.purpose}</p>
+            <p>
+              <u>Dates:</u>
+            </p>
+            {item.dates.map((another) => (
+              <p>Dec {another}</p>
+            ))}
             <p key={item._id}>Status: {item.status}</p>
           </div>
         );
