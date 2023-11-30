@@ -8,12 +8,37 @@ export const HodHome = () => {
   const [rd, setRd] = useState([]);
   const [checkbox, setCheckBox] = useState([]);
   const [availableRooms, setAvailableRooms] = useState([]);
+  // const [Dat, setDate] = useState([]);
+
   useEffect(() => {
     const fetchRdData = async () => {
       const response = await axios.get(`${URL}/rd`);
       setRd(response.data);
     };
     fetchRdData();
+    // var now = new Date();
+    // var time = now.getDate();
+    // var mon = now.getMonth();
+    // var year = now.getFullYear();
+    // var daysinMonth = new Date(
+    //   now.getFullYear(),
+    //   now.getMonth() + 1,
+    //   0
+    // ).getDate();
+    // var dates = [];
+    // for (let i = 0, k = 0; i < 30; i++) {
+    //   if (k + time > daysinMonth) {
+    //     dates.push(
+    //       String(time + k - daysinMonth) + "-" + (mon + 1) + "-" + year
+    //     );
+    //     k += 1;
+    //   } else {
+    //     dates.push(String(time + k) + "-" + mon + "-" + year);
+    //     k += 1;
+    //   }
+    // }
+    // console.log(dates);
+    // setDate(dates);
   }, []);
   const navigate = useNavigate();
   const handleBook = (room, duration) => {
