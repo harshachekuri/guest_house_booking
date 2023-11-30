@@ -27,6 +27,9 @@ mongoose
 
 app.use(express.json());
 app.use(cors());
+app.get('/',(req,res)=>{
+  res.send("Server Running");
+})
 app.use("/auth", authRouter);
 app.use("/form", formRouter);
 app.use("/admin", adminRouter);
